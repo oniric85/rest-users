@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  php:
+    build:
+      context: ./docker/php
+      args:
+        APP_GROUP: www-data
+        APP_USER: www-data
+    environment:
+      APP_GROUP: www-data
+      APP_USER: www-data
+    volumes:
+      - .:/var/www/html
+  www:
+    build:
+      context: ./docker/apache
+      args:
+        APP_GROUP: www-data
+        APP_USER: www-data
+    environment:
+      APP_GROUP: www-data
+      APP_USER: www-data
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  rabbit:
+    image: "rabbitmq:3.7-management"
+    tty: true
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_DEFAULT_VHOST}"
+
+volumes:
+  data:
