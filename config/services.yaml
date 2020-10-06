@@ -29,3 +29,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    Oniric85\UsersService\Http\Request\RequestValidationListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 6 }
+
+    Oniric85\UsersService\Http\Response\ResponseExceptionListener:
+        arguments: ["%kernel.environment%"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: -5 }
