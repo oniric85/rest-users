@@ -33,6 +33,4 @@ class SearchUsers
     {
         return $this->email;
     }
-
-
 }
