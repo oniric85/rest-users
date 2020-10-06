@@ -1,0 +1,13 @@
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+
+parameters:
+    level: 8
+    ignoreErrors:
+        - '#^Property Oniric85\\UsersService\\Http\\Request\\Model\\.*::\$.+ has no typehint specified.#'
+    checkMissingIterableValueType: false
+    symfony:
+        container_xml_path: var/cache/dev/Oniric85_UsersService_KernelDevDebugContainer.xml
+    paths:
+        - src
