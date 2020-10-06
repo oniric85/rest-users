@@ -9,8 +9,8 @@ class CreateUser
     /**
      * @Assert\Type(
      *     type="string",
-     *     message="The email must be of type {{type}}.",
-     *     groups="[Strict]"
+     *     message="The email must be of type {{ type }}.",
+     *     groups="Strict"
      * )
      * @Assert\NotBlank(
      *     message="The email cannot be empty."
@@ -24,8 +24,8 @@ class CreateUser
     /**
      * @Assert\Type(
      *     type="string",
-     *     message="The first_name must be of type {{type}}.",
-     *     groups="[Strict]"
+     *     message="The first_name must be of type {{ type }}.",
+     *     groups="Strict"
      * )
      * @Assert\NotBlank(
      *     message="The first_name cannot be empty."
@@ -36,11 +36,15 @@ class CreateUser
     /**
      * @Assert\Type(
      *     type="string",
-     *     message="The password must be of type {{type}}.",
-     *     groups="[Strict]"
+     *     message="The password must be of type {{ type }}.",
+     *     groups="Strict"
      * )
      * @Assert\NotBlank(
      *     message="The password cannot be empty."
+     * )
+     * @Assert\Length(
+     *     min=8,
+     *     minMessage="The password minimum length should be {{ limit }}."
      * )
      */
     private $password;
