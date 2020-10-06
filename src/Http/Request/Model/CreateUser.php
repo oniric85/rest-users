@@ -27,12 +27,23 @@ class CreateUser
      *     message="The first_name must be of type {{type}}.",
      *     groups="[Strict]"
      * )
-     *
      * @Assert\NotBlank(
      *     message="The first_name cannot be empty."
      * )
      */
     private $first_name;
+
+    /**
+     * @Assert\Type(
+     *     type="string",
+     *     message="The password must be of type {{type}}.",
+     *     groups="[Strict]"
+     * )
+     * @Assert\NotBlank(
+     *     message="The password cannot be empty."
+     * )
+     */
+    private $password;
 
     public function getFirstName(): string
     {
@@ -42,5 +53,10 @@ class CreateUser
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 }

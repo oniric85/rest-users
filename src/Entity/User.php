@@ -24,14 +24,20 @@ class User
     private string $email;
 
     /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private string $hashedPassword;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private string $firstName;
 
-    public function __construct(string $email, string $firstName)
+    public function __construct(string $email, string $hashedPassword, string $firstName)
     {
         $this->id = Uuid::uuid4();
         $this->email = $email;
+        $this->hashedPassword = $hashedPassword;
         $this->firstName = $firstName;
     }
 

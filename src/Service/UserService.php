@@ -18,13 +18,15 @@ class UserService
         $this->em = $em;
     }
 
-    public function createUser(string $email, string $firstName, string $ip): User
+    public function createUser(string $email, string $plainTextPassword, string $firstName, string $ip): User
     {
         if ($this->repository->findByEmail($email)) {
             throw new EmailAlreadyUsedException();
         }
 
-        $user = new User($email, $firstName);
+        $hashedPassword = password_hash($plainTextPassword, PASSWORD_DEFAULT);
+
+        $user = new User($email, $hashedPassword, $firstName);
 
         $this->em->persist($user);
         $this->em->flush();

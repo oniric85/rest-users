@@ -42,9 +42,10 @@ class UsersController extends AbstractController
     public function create(CreateUser $model, UserService $userService, Request $req): JsonResponse
     {
         $email = $model->getEmail();
+        $plainTextPassword = $model->getPassword();
         $firstName = $model->getFirstName();
 
-        $userService->createUser($email, $firstName, $req->getClientIp());
+        $userService->createUser($email, $plainTextPassword, $firstName, $req->getClientIp());
 
         return $this->json([
             'message' => 'User created successfully!',
