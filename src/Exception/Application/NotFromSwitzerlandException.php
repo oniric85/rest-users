@@ -2,7 +2,7 @@
 
 namespace Oniric85\UsersService\Exception\Application;
 
-class NotFromSwitzerland extends ApplicationException
+class NotFromSwitzerlandException extends ApplicationException
 {
     public function __construct()
     {

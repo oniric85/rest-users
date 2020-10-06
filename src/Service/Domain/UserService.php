@@ -3,7 +3,7 @@
 namespace Oniric85\UsersService\Service\Domain;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Oniric85\UsersService\Exception\Application\NotFromSwitzerland;
+use Oniric85\UsersService\Exception\Application\NotFromSwitzerlandException;
 use Oniric85\UsersService\Service\Infrastructure\IpApiClient;
 use Oniric85\UsersService\Entity\User;
 use Oniric85\UsersService\Exception\Application\EmailAlreadyUsedException;
@@ -31,7 +31,7 @@ class UserService
         }
 
         if ($this->ipApiClient->getCountryCodeFromIp($ip) !== self::SWITZERLAND_COUNTRY_CODE) {
-            throw new NotFromSwitzerland();
+            throw new NotFromSwitzerlandException();
         }
 
         $hashedPassword = password_hash($plainTextPassword, PASSWORD_DEFAULT);
