@@ -21,7 +21,7 @@ class UsersController extends AbstractController
      *     name="users_search",
      *     methods={"GET"},
      *     defaults={"_model": "Oniric85\UsersService\Http\Request\Model\SearchUsers"}
- *     )
+     * )
      */
     public function search(SearchUsers $model, UserRepository $userRepository, UserEncoder $encoder): JsonResponse
     {
@@ -52,7 +52,7 @@ class UsersController extends AbstractController
      *     name="users_create",
      *     methods={"POST"},
      *     defaults={"_model": "Oniric85\UsersService\Http\Request\Model\CreateUser"}
- *     )
+     * )
      */
     public function create(CreateUser $model, UserService $userService, Request $req, UserEncoder $encoder): JsonResponse
     {
