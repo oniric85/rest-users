@@ -3,6 +3,8 @@
 namespace Oniric85\UsersService\Tests\Service\Domain;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Oniric85\UsersService\Entity\User;
+use Oniric85\UsersService\Exception\Application\EmailAlreadyUsedException;
 use Oniric85\UsersService\Exception\Application\NotFromSwitzerlandException;
 use Oniric85\UsersService\Message\UserMessage;
 use Oniric85\UsersService\Repository\UserRepository;
@@ -58,7 +60,6 @@ class UserServiceTest extends TestCase
             ->method('dispatch')
             ->willReturn(new Envelope($message));
 
-
         $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
 
         $user = $service->createUser('foo@example.com', 'password', 'Rossi', '127.0.0.1');
@@ -79,5 +80,56 @@ class UserServiceTest extends TestCase
         $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
 
         $service->createUser('foo@example.com', 'password', 'Rossi', '127.0.0.1');
+    }
+
+    public function testUserCreationThrowsIfEmailAlreadyUsed(): void
+    {
+        $this->expectException(EmailAlreadyUsedException::class);
+
+        $this->repository
+            ->expects($this->once())
+            ->method('findOneByEmail')
+            ->with('foo@example.com')
+            ->willReturn(new User('foo@example.com', 'test', 'test'));
+
+        $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
+
+        $service->createUser('foo@example.com', 'password', 'Rossi', '127.0.0.1');
+    }
+
+    public function testUserUpdateIsSuccessful(): void
+    {
+        $message = new UserMessage('testId');
+
+        $this->bus
+            ->expects($this->once())
+            ->method('dispatch')
+            ->willReturn(new Envelope($message));
+
+        $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
+
+        $user = new User('foo@example.com', 'test', 'test');
+
+        $service->updateUser($user, 'foo2@example.com', 'password', 'Bianchi');
+
+        $this->assertSame('foo2@example.com', $user->getEmail());
+        $this->assertSame('Bianchi', $user->getFirstName());
+    }
+
+    public function testUserUpdateThrowsIfEmailAlreadyUsed(): void
+    {
+        $this->expectException(EmailAlreadyUsedException::class);
+
+        $this->repository
+            ->expects($this->once())
+            ->method('findOneByEmail')
+            ->with('foo2@example.com')
+            ->willReturn(new User('foo@example.com', 'test', 'test'));
+
+        $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
+
+        $user = new User('foo@example.com', 'test', 'test');
+
+        $service->updateUser($user, 'foo2@example.com', 'password', 'Bianchi');
     }
 }
