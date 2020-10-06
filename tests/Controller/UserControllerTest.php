@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserControllerTest extends WebTestCase
 {
-    public function testUserCreationIsSuccessful()
+    public function testUserCreationIsSuccessful(): void
     {
         $client = static::createClient();
 
@@ -30,7 +30,7 @@ class UserControllerTest extends WebTestCase
         $this->assertJson($client->getResponse()->getContent());
     }
 
-    public function testUserCreationDoesNotAllowEmailReuse()
+    public function testUserCreationDoesNotAllowEmailReuse(): void
     {
         $client = static::createClient();
 
@@ -64,7 +64,7 @@ class UserControllerTest extends WebTestCase
         $this->assertJson($client->getResponse()->getContent());
     }
 
-    public function testUserUpdateIsSuccessful()
+    public function testUserUpdateIsSuccessful(): void
     {
         $client = static::createClient();
 
@@ -108,7 +108,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSame('test', $result['first_name']);
     }
 
-    public function testUserSearchByEmail()
+    public function testUserSearchByEmail(): void
     {
         $client = static::createClient();
 
