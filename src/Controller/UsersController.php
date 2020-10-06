@@ -2,12 +2,10 @@
 
 namespace Oniric85\UsersService\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Oniric85\UsersService\Encoder\UserEncoder;
-use Oniric85\UsersService\Entity\User;
 use Oniric85\UsersService\Http\Request\Model\CreateUser;
 use Oniric85\UsersService\Repository\UserRepository;
-use Oniric85\UsersService\Service\UserService;
+use Oniric85\UsersService\Service\Domain\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
