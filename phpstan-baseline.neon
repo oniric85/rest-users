@@ -1,0 +1,17 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#4 \\$ip of method Oniric85\\\\UsersService\\\\Service\\\\Domain\\\\UserService\\:\\:createUser\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/UsersController.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method Oniric85\\\\UsersService\\\\Http\\\\Request\\\\RequestValidationListener\\:\\:buildModel\\(\\)$#"
+			count: 1
+			path: src/Http/Request/RequestValidationListener.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: src/Service/Infrastructure/IpApiClient.php
+
