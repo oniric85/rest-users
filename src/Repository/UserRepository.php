@@ -2,20 +2,23 @@
 
 namespace Oniric85\UsersService\Repository;
 
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Persistence\ObjectRepository;
 use Oniric85\UsersService\Entity\User;
 
 class UserRepository
 {
-    private ObjectRepository$repository;
+    /**
+     * @var EntityRepository<User>
+     */
+    private EntityRepository $repository;
 
     public function __construct(ManagerRegistry $registry)
     {
         $this->repository = $registry->getRepository(User::class);
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         return $this->repository->findAll();
     }
@@ -27,7 +30,9 @@ class UserRepository
 
     public function findOneById(string $id): ?User
     {
-        return $this->repository->findOneById($id);
+        return $this->repository->findOneBy([
+            'id' => $id,
+        ]);
     }
 
     public function findOneByEmail(string $email): ?User
