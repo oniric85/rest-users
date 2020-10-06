@@ -4,7 +4,7 @@ namespace Oniric85\UsersService\Service\Infrastructure;
 
 use RuntimeException;
 
-class IpApiClient
+class IpApiClient implements IpApiClientInterface
 {
     /**
      * @throws RuntimeException

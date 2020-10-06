@@ -1,0 +1,3 @@
+services:
+  Oniric85\UsersService\Service\Infrastructure\IpApiClientInterface:
+    alias: Oniric85\UsersService\Service\Infrastructure\MockIpApiClient
