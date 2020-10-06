@@ -8,6 +8,7 @@ use Oniric85\UsersService\Http\Request\Exception\InvalidPayloadException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResponseExceptionListener
 {
@@ -38,6 +39,12 @@ class ResponseExceptionListener
             ], $statusCode);
         } elseif ($exception instanceof InvalidPayloadException) {
             $statusCode = Response::HTTP_BAD_REQUEST;
+
+            $response = new JsonResponse([
+                'error' => $exception->getMessage(),
+            ], $statusCode);
+        } elseif ($exception instanceof NotFoundHttpException) {
+            $statusCode = Response::HTTP_NOT_FOUND;
 
             $response = new JsonResponse([
                 'error' => $exception->getMessage(),
