@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserEncoderTest extends TestCase
 {
-    public function testEncodeIsSuccessful()
+    public function testEncodeIsSuccessful(): void
     {
         $encoder = new UserEncoder();
 
