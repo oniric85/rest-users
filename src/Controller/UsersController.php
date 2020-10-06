@@ -75,8 +75,13 @@ class UsersController extends AbstractController
      *     defaults={"_model": "Oniric85\UsersService\Http\Request\Model\UpdateUser"}
      * )
      */
-    public function update(string $id, UpdateUser $model, UserRepository $repository, UserEncoder $encoder): JsonResponse
-    {
+    public function update(
+        string $id,
+        UpdateUser $model,
+        UserService $userService,
+        UserRepository $repository,
+        UserEncoder $encoder
+    ): JsonResponse {
         $user = $repository->findOneById($id);
 
         if (!$user) {
@@ -84,6 +89,13 @@ class UsersController extends AbstractController
                 'error' => 'User not found.',
             ], Response::HTTP_NOT_FOUND);
         }
+
+        $userService->updateUser(
+            $user,
+            $model->getEmail(),
+            $model->getPassword(),
+            $model->getFirstName()
+        );
 
         return $this->json($encoder->encode($user), Response::HTTP_OK);
     }

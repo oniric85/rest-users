@@ -55,4 +55,25 @@ class User
     {
         return $this->email;
     }
+
+    public function setEmail(string $newEmail): self
+    {
+        $this->email = $newEmail;
+
+        return $this;
+    }
+
+    public function setFirstName(string $newFirstName): self
+    {
+        $this->firstName = $newFirstName;
+
+        return $this;
+    }
+
+    public function setPassword(string $newHashedPassword): self
+    {
+        $this->hashedPassword = $newHashedPassword;
+
+        return $this;
+    }
 }

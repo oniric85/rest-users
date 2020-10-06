@@ -12,9 +12,6 @@ class UpdateUser
      *     message="The email must be of type {{ type }}.",
      *     groups="Strict"
      * )
-     * @Assert\NotBlank(
-     *     message="The email cannot be empty."
-     * )
      * @Assert\Email(
      *     message="The email must be valid."
      * )
@@ -27,9 +24,6 @@ class UpdateUser
      *     message="The first_name must be of type {{ type }}.",
      *     groups="Strict"
      * )
-     * @Assert\NotBlank(
-     *     message="The first_name cannot be empty."
-     * )
      */
     private $first_name;
 
@@ -39,9 +33,6 @@ class UpdateUser
      *     message="The password must be of type {{ type }}.",
      *     groups="Strict"
      * )
-     * @Assert\NotBlank(
-     *     message="The password cannot be empty."
-     * )
      * @Assert\Length(
      *     min=8,
      *     minMessage="The password minimum length should be {{ limit }}."
@@ -49,17 +40,17 @@ class UpdateUser
      */
     private $password;
 
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->first_name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
