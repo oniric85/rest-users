@@ -47,6 +47,8 @@ class RequestValidationListener
             }
 
             $params = $payload;
+        } elseif ($method === Request::METHOD_GET) {
+            $params = $request->query->all();
         }
 
         $model = $this->buildModel($requestClass, $params);

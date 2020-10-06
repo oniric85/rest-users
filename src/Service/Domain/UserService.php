@@ -26,7 +26,7 @@ class UserService
 
     public function createUser(string $email, string $plainTextPassword, string $firstName, string $ip): User
     {
-        if ($this->repository->findByEmail($email)) {
+        if ($this->repository->findOneByEmail($email)) {
             throw new EmailAlreadyUsedException();
         }
 
