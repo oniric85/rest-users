@@ -19,4 +19,11 @@ class UserRepository
     {
         return $this->repository->findAll();
     }
+
+    public function findByEmail(string $email)
+    {
+        return $this->repository->findOneBy([
+            'email' => $email,
+        ]);
+    }
 }
