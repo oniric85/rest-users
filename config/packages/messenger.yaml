@@ -9,4 +9,4 @@ framework:
 
         routing:
             # Route your messages to the transports
-            # 'Oniric85\UsersService\Message\UserMessage': async
+            'Oniric85\UsersService\Message\UserMessage': async
