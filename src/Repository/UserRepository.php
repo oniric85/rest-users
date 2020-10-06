@@ -25,6 +25,11 @@ class UserRepository
         return $this->repository->findBy($filter);
     }
 
+    public function findOneById(string $id): ?User
+    {
+        return $this->repository->findOneById($id);
+    }
+
     public function findOneByEmail(string $email): ?User
     {
         return $this->repository->findOneBy([

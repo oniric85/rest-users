@@ -5,6 +5,7 @@ namespace Oniric85\UsersService\Controller;
 use Oniric85\UsersService\Encoder\UserEncoder;
 use Oniric85\UsersService\Http\Request\Model\CreateUser;
 use Oniric85\UsersService\Http\Request\Model\SearchUsers;
+use Oniric85\UsersService\Http\Request\Model\UpdateUser;
 use Oniric85\UsersService\Repository\UserRepository;
 use Oniric85\UsersService\Service\Domain\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,5 +64,27 @@ class UsersController extends AbstractController
         $user = $userService->createUser($email, $plainTextPassword, $firstName, $req->getClientIp());
 
         return $this->json($encoder->encode($user), Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Route(
+     *     "/users/{id}",
+     *     name="users_update",
+     *     methods={"PUT"},
+     *     requirements={"id": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"},
+     *     defaults={"_model": "Oniric85\UsersService\Http\Request\Model\UpdateUser"}
+     * )
+     */
+    public function update(string $id, UpdateUser $model, UserRepository $repository, UserEncoder $encoder): JsonResponse
+    {
+        $user = $repository->findOneById($id);
+
+        if (!$user) {
+            return $this->json([
+                'error' => 'User not found.',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->json($encoder->encode($user), Response::HTTP_OK);
     }
 }
