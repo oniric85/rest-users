@@ -54,16 +54,14 @@ class UsersController extends AbstractController
      *     defaults={"_model": "Oniric85\UsersService\Http\Request\Model\CreateUser"}
  *     )
      */
-    public function create(CreateUser $model, UserService $userService, Request $req): JsonResponse
+    public function create(CreateUser $model, UserService $userService, Request $req, UserEncoder $encoder): JsonResponse
     {
         $email = $model->getEmail();
         $plainTextPassword = $model->getPassword();
         $firstName = $model->getFirstName();
 
-        $userService->createUser($email, $plainTextPassword, $firstName, $req->getClientIp());
+        $user = $userService->createUser($email, $plainTextPassword, $firstName, $req->getClientIp());
 
-        return $this->json([
-            'message' => 'User created successfully!',
-        ], Response::HTTP_CREATED);
+        return $this->json($encoder->encode($user), Response::HTTP_CREATED);
     }
 }
