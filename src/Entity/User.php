@@ -2,7 +2,6 @@
 
 namespace Oniric85\UsersService\Entity;
 
-use Oniric85\UsersService\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

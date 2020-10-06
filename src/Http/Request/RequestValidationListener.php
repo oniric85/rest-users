@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RequestValidationListener
 {
-    private const VALIDATION_GROUP_STRICT  = 'Strict';
+    private const VALIDATION_GROUP_STRICT = 'Strict';
     private const VALIDATION_GROUP_DEFAULT = 'Default';
 
     private ValidatorInterface $validator;
@@ -47,7 +47,7 @@ class RequestValidationListener
             }
 
             $params = $payload;
-        } elseif ($method === Request::METHOD_GET) {
+        } elseif (Request::METHOD_GET === $method) {
             $params = $request->query->all();
         }
 
@@ -109,7 +109,7 @@ class RequestValidationListener
             $errorMessages = [];
 
             foreach ($errors as $error) {
-                $field        = $error->getPropertyPath();
+                $field = $error->getPropertyPath();
                 $errorMessage = $error->getMessage();
 
                 if (!isset($errorMessages[$field])) {

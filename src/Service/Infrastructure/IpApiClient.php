@@ -13,7 +13,7 @@ class IpApiClient
     {
         $response = file_get_contents(sprintf('https://ipapi.co/%s/json/', $ip));
 
-        if (($payload = json_decode($response, true)) === null) {
+        if (null === ($payload = json_decode($response, true))) {
             throw new RuntimeException('Error with external ipapi service.');
         }
 

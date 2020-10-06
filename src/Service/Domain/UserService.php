@@ -3,12 +3,12 @@
 namespace Oniric85\UsersService\Service\Domain;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Oniric85\UsersService\Exception\Application\NotFromSwitzerlandException;
-use Oniric85\UsersService\Message\UserMessage;
-use Oniric85\UsersService\Service\Infrastructure\IpApiClient;
 use Oniric85\UsersService\Entity\User;
 use Oniric85\UsersService\Exception\Application\EmailAlreadyUsedException;
+use Oniric85\UsersService\Exception\Application\NotFromSwitzerlandException;
+use Oniric85\UsersService\Message\UserMessage;
 use Oniric85\UsersService\Repository\UserRepository;
+use Oniric85\UsersService\Service\Infrastructure\IpApiClient;
 use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -39,13 +39,13 @@ class UserService
             throw new EmailAlreadyUsedException();
         }
 
-        if ($this->ipApiClient->getCountryCodeFromIp($ip) !== self::SWITZERLAND_COUNTRY_CODE) {
+        if (self::SWITZERLAND_COUNTRY_CODE !== $this->ipApiClient->getCountryCodeFromIp($ip)) {
             throw new NotFromSwitzerlandException();
         }
 
         $hashedPassword = password_hash($plainTextPassword, PASSWORD_DEFAULT);
 
-        if ($hashedPassword === false) {
+        if (false === $hashedPassword) {
             throw new RuntimeException('Error hashing password.');
         }
 
@@ -72,7 +72,7 @@ class UserService
         if ($newPlainTextPassword) {
             $newHashedPassword = password_hash($newPlainTextPassword, PASSWORD_DEFAULT);
 
-            if ($newHashedPassword === false) {
+            if (false === $newHashedPassword) {
                 throw new RuntimeException('Error hashing password.');
             }
 

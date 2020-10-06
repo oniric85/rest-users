@@ -2,9 +2,9 @@
 
 namespace Oniric85\UsersService\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
 use Oniric85\UsersService\Entity\User;
-use Doctrine\Persistence\ManagerRegistry;
 
 class UserRepository
 {
