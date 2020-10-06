@@ -10,6 +10,7 @@ use Oniric85\UsersService\Service\Domain\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UsersController extends AbstractController
@@ -63,6 +64,6 @@ class UsersController extends AbstractController
 
         return $this->json([
             'message' => 'User created successfully!',
-        ]);
+        ], Response::HTTP_CREATED);
     }
 }
