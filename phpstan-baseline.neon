@@ -11,7 +11,7 @@ parameters:
 			path: src/Http/Request/RequestValidationListener.php
 
 		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Service/Infrastructure/IpApiClient.php
 
