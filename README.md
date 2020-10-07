@@ -3,6 +3,74 @@
 This repository contains a demo implementation of a simple `Users` microservice. It is based on
 Symfony 5 PHP framework. It uses MySQL for persistence and RabbitMQ as a message bus.
 
+## Features
+
+The microservice supports just 3 simple endpoints.
+
+- User creation
+- User update
+- User search
+
+### User creation
+
+Used to create a new `User`.
+
+**URL** : `/users`
+
+**Method** : `POST`
+
+**Data constraints**
+
+```json
+{
+    "email": "[valid email address]",
+    "password": "[password in plain text, 8 characters minimum length]",
+    "first_name": "[not empty first name]"
+}
+```
+
+**Data example**
+
+```json
+{
+    "email": "mario@example.com",
+    "password": "password",
+    "first_name": "Rossi"
+}
+```
+
+#### Success Response
+
+**Code** : `201 Created`
+
+**Content example**
+
+```json
+{
+    "id": "01c95056-5adb-4c35-a098-b78e8e95fbdf",
+    "email": "mario@example.com",
+    "first_name": "Rossi"
+}
+```
+
+#### Error Response
+
+**Condition** : If `password` is shorter than minimum length.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+    "error": {
+        "password": [
+            "The password minimum length should be 8."
+        ]
+    }
+}
+```
+
 ## Development environment
 
 The development environment is based on Docker Compose with the following containers:
