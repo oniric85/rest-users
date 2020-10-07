@@ -62,7 +62,13 @@ class UserServiceTest extends TestCase
 
         $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
 
-        $user = $service->createUser('foo@example.com', 'password', 'Rossi', '127.0.0.1');
+        $user = $service->createUser(
+            'foo@example.com',
+            'password',
+            'Rossi',
+            'Elm street 15, New York',
+            '127.0.0.1'
+        );
 
         $this->assertSame('foo@example.com', $user->getEmail());
         $this->assertSame('Rossi', $user->getFirstName());
@@ -79,22 +85,36 @@ class UserServiceTest extends TestCase
 
         $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
 
-        $service->createUser('foo@example.com', 'password', 'Rossi', '127.0.0.1');
+        $service->createUser(
+            'foo@example.com',
+            'password',
+            'Rossi',
+            'Elm street 15, New York',
+            '127.0.0.1'
+        );
     }
 
     public function testUserCreationThrowsIfEmailAlreadyUsed(): void
     {
         $this->expectException(EmailAlreadyUsedException::class);
 
+        $user = new User('foo@example.com', 'test', 'test', 'Elm street 15, New York');
+
         $this->repository
             ->expects($this->once())
             ->method('findOneByEmail')
             ->with('foo@example.com')
-            ->willReturn(new User('foo@example.com', 'test', 'test'));
+            ->willReturn($user);
 
         $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
 
-        $service->createUser('foo@example.com', 'password', 'Rossi', '127.0.0.1');
+        $service->createUser(
+            'foo@example.com',
+            'password',
+            'Rossi',
+            'Elm street 15, New York',
+            '127.0.0.1'
+        );
     }
 
     public function testUserUpdateIsSuccessful(): void
@@ -108,9 +128,15 @@ class UserServiceTest extends TestCase
 
         $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
 
-        $user = new User('foo@example.com', 'test', 'test');
+        $user = new User('foo@example.com', 'test', 'test', 'Elm street 15, New York');
 
-        $service->updateUser($user, 'foo2@example.com', 'password', 'Bianchi');
+        $service->updateUser(
+            $user,
+            'foo2@example.com',
+            'password',
+            'Bianchi',
+            'Elm street 15, New York'
+        );
 
         $this->assertSame('foo2@example.com', $user->getEmail());
         $this->assertSame('Bianchi', $user->getFirstName());
@@ -124,12 +150,18 @@ class UserServiceTest extends TestCase
             ->expects($this->once())
             ->method('findOneByEmail')
             ->with('foo2@example.com')
-            ->willReturn(new User('foo@example.com', 'test', 'test'));
+            ->willReturn(new User('foo@example.com', 'test', 'test', 'Elm street 15, New York'));
 
         $service = new UserService($this->repository, $this->em, $this->ipApiClient, $this->bus);
 
-        $user = new User('foo@example.com', 'test', 'test');
+        $user = new User('foo@example.com', 'test', 'test', 'Elm street 25, New York', );
 
-        $service->updateUser($user, 'foo2@example.com', 'password', 'Bianchi');
+        $service->updateUser(
+            $user,
+            'foo2@example.com',
+            'password',
+            'Bianchi',
+            'Elm street 15, New York'
+        );
     }
 }

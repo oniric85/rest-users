@@ -60,8 +60,15 @@ class UsersController extends AbstractController
         $email = $model->getEmail();
         $plainTextPassword = $model->getPassword();
         $firstName = $model->getFirstName();
+        $address = $model->getAddress();
 
-        $user = $userService->createUser($email, $plainTextPassword, $firstName, $req->getClientIp());
+        $user = $userService->createUser(
+            $email,
+            $plainTextPassword,
+            $firstName,
+            $address,
+            $req->getClientIp()
+        );
 
         return $this->json($encoder->encode($user), Response::HTTP_CREATED);
     }
@@ -94,7 +101,8 @@ class UsersController extends AbstractController
             $user,
             $model->getEmail(),
             $model->getPassword(),
-            $model->getFirstName()
+            $model->getFirstName(),
+            $model->getAddress()
         );
 
         return $this->json($encoder->encode($user), Response::HTTP_OK);

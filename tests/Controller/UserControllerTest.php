@@ -15,6 +15,7 @@ class UserControllerTest extends WebTestCase
             'email' => 'test@example.com',
             'first_name' => 'foobar',
             'password' => 'password',
+            'address' => 'Elm street 15, New York',
         ];
 
         $client->request(
@@ -38,6 +39,7 @@ class UserControllerTest extends WebTestCase
             'email' => 'test@example.com',
             'first_name' => 'foobar',
             'password' => 'password',
+            'address' => 'Elm street 15, New York',
         ];
 
         $client->request(
@@ -72,6 +74,7 @@ class UserControllerTest extends WebTestCase
             'email' => 'test@example.com',
             'first_name' => 'foobar',
             'password' => 'password',
+            'address' => 'Elm street 15, New York',
         ];
 
         $client->request(
@@ -90,6 +93,7 @@ class UserControllerTest extends WebTestCase
 
         $updatedData = [
             'first_name' => 'test',
+            'address' => 'foo',
         ];
 
         $client->request(
@@ -106,6 +110,7 @@ class UserControllerTest extends WebTestCase
 
         $result = json_decode($client->getResponse()->getContent(), true);
         $this->assertSame('test', $result['first_name']);
+        $this->assertSame('foo', $result['address']);
     }
 
     public function testUserSearchByEmail(): void
@@ -116,6 +121,7 @@ class UserControllerTest extends WebTestCase
             'email' => 'test@example.com',
             'first_name' => 'foobar',
             'password' => 'password',
+            'address' => 'Elm street 15, New York',
         ];
 
         $client->request(

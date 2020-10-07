@@ -12,15 +12,22 @@ class UserEncoderTest extends TestCase
     {
         $encoder = new UserEncoder();
 
-        $user = new User('test@example.com', 'foo', 'Rossi');
+        $user = new User(
+            'test@example.com',
+            'foo',
+            'Rossi',
+            'Elm street 15, New York'
+        );
 
         $encodedUser = $encoder->encode($user);
 
-        $this->assertCount(3, $encodedUser);
+        $this->assertCount(4, $encodedUser);
         $this->assertArrayHasKey('email', $encodedUser);
         $this->assertArrayHasKey('first_name', $encodedUser);
         $this->assertArrayHasKey('id', $encodedUser);
+        $this->assertArrayHasKey('address', $encodedUser);
         $this->assertSame('test@example.com', $encodedUser['email']);
         $this->assertSame('Rossi', $encodedUser['first_name']);
+        $this->assertSame('Elm street 15, New York', $encodedUser['address']);
     }
 }

@@ -32,12 +32,18 @@ class User
      */
     private string $firstName;
 
-    public function __construct(string $email, string $hashedPassword, string $firstName)
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $address;
+
+    public function __construct(string $email, string $hashedPassword, string $firstName, string $address)
     {
         $this->id = Uuid::uuid4();
         $this->email = $email;
         $this->hashedPassword = $hashedPassword;
         $this->firstName = $firstName;
+        $this->address = $address;
     }
 
     public function getId(): UuidInterface
@@ -48,6 +54,13 @@ class User
     public function getFirstName(): string
     {
         return $this->firstName;
+    }
+
+    public function setFirstName(string $newFirstName): self
+    {
+        $this->firstName = $newFirstName;
+
+        return $this;
     }
 
     public function getEmail(): string
@@ -62,16 +75,21 @@ class User
         return $this;
     }
 
-    public function setFirstName(string $newFirstName): self
+    public function setPassword(string $newHashedPassword): self
     {
-        $this->firstName = $newFirstName;
+        $this->hashedPassword = $newHashedPassword;
 
         return $this;
     }
 
-    public function setPassword(string $newHashedPassword): self
+    public function getAddress(): string
     {
-        $this->hashedPassword = $newHashedPassword;
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

@@ -40,6 +40,19 @@ class UpdateUser
      */
     private $password;
 
+    /**
+     * @Assert\Type(
+     *     type="string",
+     *     message="The address must be of type {{ type }}.",
+     *     groups="Strict"
+     * )
+     * @Assert\Length(
+     *     max=255,
+     *     maxMessage="The address maximum length is {{ limit }}."
+     * )
+     */
+    private $address;
+
     public function getFirstName(): ?string
     {
         return $this->first_name;
@@ -53,5 +66,10 @@ class UpdateUser
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
     }
 }

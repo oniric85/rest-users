@@ -12,6 +12,7 @@ class UserEncoder
             'id' => $user->getId(),
             'email' => $user->getEmail(),
             'first_name' => $user->getFirstName(),
+            'address' => $user->getAddress(),
         ];
     }
 }

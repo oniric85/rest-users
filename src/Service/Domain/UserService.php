@@ -33,8 +33,13 @@ class UserService
         $this->bus = $bus;
     }
 
-    public function createUser(string $email, string $plainTextPassword, string $firstName, string $ip): User
-    {
+    public function createUser(
+        string $email,
+        string $plainTextPassword,
+        string $firstName,
+        string $address,
+        string $ip
+    ): User {
         if ($this->repository->findOneByEmail($email)) {
             throw new EmailAlreadyUsedException();
         }
@@ -49,7 +54,7 @@ class UserService
             throw new RuntimeException('Error hashing password.');
         }
 
-        $user = new User($email, $hashedPassword, $firstName);
+        $user = new User($email, $hashedPassword, $firstName, $address);
 
         $this->em->persist($user);
         $this->em->flush();
@@ -59,8 +64,13 @@ class UserService
         return $user;
     }
 
-    public function updateUser(User $user, ?string $newEmail, ?string $newPlainTextPassword, ?string $newFirstName): void
-    {
+    public function updateUser(
+        User $user,
+        ?string $newEmail,
+        ?string $newPlainTextPassword,
+        ?string $newFirstName,
+        ?string $newAddress
+    ): void {
         if ($newEmail && $newEmail !== $user->getEmail()) {
             if ($this->repository->findOneByEmail($newEmail)) {
                 throw new EmailAlreadyUsedException();
@@ -81,6 +91,10 @@ class UserService
 
         if ($newFirstName) {
             $user->setFirstName($newFirstName);
+        }
+
+        if ($newAddress) {
+            $user->setAddress($newAddress);
         }
 
         $this->em->flush();
