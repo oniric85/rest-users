@@ -3,6 +3,11 @@
 This repository contains a demo implementation of a simple `Users` microservice. It is based on
 Symfony 5 PHP framework. It uses MySQL for persistence and RabbitMQ as a message bus.
 
+## External services
+
+This microservice communicates over HTTPS with (ipapi.co)[https://www.ipapi.co]. This service is used to geolocate the
+calling IP on user creation. This service has rate limitation.
+
 ## Features
 
 The microservice supports just 3 simple endpoints.
