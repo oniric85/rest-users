@@ -71,6 +71,76 @@ Used to create a new `User`.
 }
 ```
 
+### User update
+
+Used to update an existing `User`.
+
+**URL** : `/users/:id`
+
+**URL Parameters** : `id=[uuid]` where `id` is the 36 characters UUID of the `User`.
+
+**Method** : `PUT`
+
+**Data constraints**
+
+```json
+{
+    "email": "[valid email address]",
+    "password": "[password in plain text, 8 characters minimum length]",
+    "first_name": "[not empty first name]"
+}
+```
+
+**Data example**
+
+```json
+{
+    "email": "mario@example.com",
+    "password": "password",
+    "first_name": "Rossi"
+}
+```
+
+**Data example** Partial data is allowed.
+
+```json
+{
+    "email": "[valid email address]"
+}
+```
+
+#### Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+{
+    "id": "01c95056-5adb-4c35-a098-b78e8e95fbdf",
+    "email": "mario@example.com",
+    "first_name": "Bianchi"
+}
+```
+
+#### Error Response
+
+**Condition** : `User` with the given id does not exist.
+
+**Code** : `404 Not Found`
+
+**Content** :
+
+```json
+{
+    "error": "User not found."
+}
+```
+
+#### Data ignored
+
+Endpoint will ignore irrelevant and read-only data such as parameters that don't exist or `id`.
+
 ## Development environment
 
 The development environment is based on Docker Compose with the following containers:
