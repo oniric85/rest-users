@@ -30,7 +30,8 @@ Used to create a new `User`.
 {
     "email": "[valid email address]",
     "password": "[password in plain text, 8 characters minimum length]",
-    "first_name": "[not empty first name]"
+    "first_name": "[not empty first name]",
+    "address": "[not empty address]"
 }
 ```
 
@@ -40,7 +41,8 @@ Used to create a new `User`.
 {
     "email": "mario@example.com",
     "password": "password",
-    "first_name": "Rossi"
+    "first_name": "Rossi",
+    "address": "Elm street 15, New York"
 }
 ```
 
@@ -54,7 +56,8 @@ Used to create a new `User`.
 {
     "id": "01c95056-5adb-4c35-a098-b78e8e95fbdf",
     "email": "mario@example.com",
-    "first_name": "Rossi"
+    "first_name": "Rossi",
+    "address": "Elm street 15, New York"
 }
 ```
 
@@ -92,7 +95,8 @@ Used to update an existing `User`.
 {
     "email": "[valid email address]",
     "password": "[password in plain text, 8 characters minimum length]",
-    "first_name": "[not empty first name]"
+    "first_name": "[not empty first name]",
+    "address": "[not empty address]"
 }
 ```
 
@@ -103,6 +107,7 @@ Used to update an existing `User`.
     "email": "mario@example.com",
     "password": "password",
     "first_name": "Rossi"
+    "address": "Elm street 15, New York"
 }
 ```
 
@@ -124,7 +129,8 @@ Used to update an existing `User`.
 {
     "id": "01c95056-5adb-4c35-a098-b78e8e95fbdf",
     "email": "mario@example.com",
-    "first_name": "Bianchi"
+    "first_name": "Bianchi",
+    "address": "Elm street 15, New York"
 }
 ```
 
@@ -173,12 +179,14 @@ This endpoint does not any data payload.
     {
         "id": "174fd18e-781f-43c2-b074-a60384c3cab0",
         "email": "test1@example.com",
-        "first_name": "Bianchi"
+        "first_name": "Bianchi",
+        "address": "Elm street 15, New York"
     },
     {
         "id": "1b2ac7aa-ec86-430e-95b1-2f2cbcec12a1",
         "email": "test2@example.com",
-        "first_name": "Rossi"
+        "first_name": "Rossi",
+        "address": "Rue de Rivoli 20, Paris"
     }
 ]
 ```
