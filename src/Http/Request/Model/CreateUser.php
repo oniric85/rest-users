@@ -18,6 +18,10 @@ class CreateUser
      * @Assert\Email(
      *     message="The email must be valid."
      * )
+     * @Assert\Length(
+     *     max=50,
+     *     maxMessage="The email maximum length is {{ limit }}."
+     * )
      */
     private $email;
 
@@ -29,6 +33,10 @@ class CreateUser
      * )
      * @Assert\NotBlank(
      *     message="The first_name cannot be empty."
+     * )
+     * @Assert\Length(
+     *     max=255,
+     *     maxMessage="The email maximum length is {{ limit }}."
      * )
      */
     private $first_name;

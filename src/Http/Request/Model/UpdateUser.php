@@ -15,6 +15,10 @@ class UpdateUser
      * @Assert\Email(
      *     message="The email must be valid."
      * )
+     * @Assert\Length(
+     *     max=50,
+     *     maxMessage="The email maximum length is {{ limit }}."
+     * )
      */
     private $email;
 
@@ -23,6 +27,10 @@ class UpdateUser
      *     type="string",
      *     message="The first_name must be of type {{ type }}.",
      *     groups="Strict"
+     * )
+     * @Assert\Length(
+     *     max=255,
+     *     maxMessage="The first_name maximum length is {{ limit }}."
      * )
      */
     private $first_name;
