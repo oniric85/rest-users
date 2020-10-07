@@ -9,7 +9,7 @@ The microservice supports just 3 simple endpoints.
 
 - User creation
 - User update
-- User search
+- Users search
 
 ### User creation
 
@@ -140,6 +140,47 @@ Used to update an existing `User`.
 #### Data ignored
 
 Endpoint will ignore irrelevant and read-only data such as parameters that don't exist or `id`.
+
+## Users search
+
+Used to search `Users` respecting certain criteria. Currently, search by `email` and `first_name` is supported. If no
+search filter is specified all users are returned. The endpoint only returns users that exactly match.
+
+**URL** : `/users?first_name=:first_name&email=:email`
+
+**URL Parameters** : `first_name=[string]` where `string` is any valid string (optional), `email=[string]` where `string`
+is any valid string (optional). 
+
+**Method** : `GET`
+
+**Data constraints**
+
+This endpoint does not any data payload.
+
+#### Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+[
+    {
+        "id": "174fd18e-781f-43c2-b074-a60384c3cab0",
+        "email": "test1@example.com",
+        "first_name": "Bianchi"
+    },
+    {
+        "id": "1b2ac7aa-ec86-430e-95b1-2f2cbcec12a1",
+        "email": "test2@example.com",
+        "first_name": "Rossi"
+    }
+]
+```
+
+#### Error Response
+
+There aren't error cases for this endpoint.
 
 ## Development environment
 
