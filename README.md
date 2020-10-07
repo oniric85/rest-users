@@ -242,3 +242,9 @@ You can use PHPStan to scan your code for issues:
 ```
 docker-compose exec -u www-data php vendor/bin/phpstan analyse
 ```
+
+### Configuration parameters
+
+You can customize the configuration parameters of the application by creating a `.env.local` file
+in the project root directory. In this file you can override any environment variable used by the
+application.
