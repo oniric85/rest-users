@@ -66,6 +66,33 @@ class UserControllerTest extends WebTestCase
         $this->assertJson($client->getResponse()->getContent());
     }
 
+    public function testUserCreationDoesNotAllowVeryLongAddress(): void
+    {
+        $client = static::createClient();
+
+        $data = [
+            'email' => 'test@example.com',
+            'first_name' => 'foobar',
+            'password' => 'password',
+            'address' => str_repeat('New', 100).' York',
+        ];
+
+        $client->request(
+            'POST',
+            '/users',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode($data)
+        );
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
+        $this->assertJson($client->getResponse()->getContent());
+        $response = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('error', $response);
+        $this->assertArrayHasKey('address', $response['error']);
+    }
+
     public function testUserUpdateIsSuccessful(): void
     {
         $client = static::createClient();
